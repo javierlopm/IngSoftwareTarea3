@@ -7,4 +7,5 @@ class clsUser(db.Model):
     email    = db.column(db.string(30),              unique=True )
     iddpt    = db.column(db.Integer   ,db.ForeignKey('dpt.iddpt'))
     idrole   = db.column(db.Integer   ,db.ForeignKey('role.idrole'))
+
     
