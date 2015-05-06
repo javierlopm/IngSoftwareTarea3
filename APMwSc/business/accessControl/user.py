@@ -26,8 +26,8 @@ class clsUser(db.Model):
     username = db.Column(db.String(16),         primary_key=True )
     password = db.Column(db.String(16),              nullable=False)
     email    = db.Column(db.String(30),              unique=True )
-    iddpt    = db.Column(db.Integer   ,db.ForeignKey('tbdpt.iddpt'))
-    idrole   = db.Column(db.Integer   ,db.ForeignKey('tbrole.idrole'))
+    iddpt    = db.Column(db.Integer   ,db.ForeignKey('clsDpt.iddpt'))
+    idrole   = db.Column(db.Integer   ,db.ForeignKey('clsRole.idrole'))
     
     
     def __init__(self,fullname,username,password,email,iddpt,idrole):        

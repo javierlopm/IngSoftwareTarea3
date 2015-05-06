@@ -12,7 +12,8 @@ import jinja2
 from jinja2.loaders import FileSystemLoader
 from business.accessControl.user import userBlueprint,clsUser
 from business.accessControl.role import roleBlueprint
-
+from business.accessControl.dpt import dptBlueprint
+from business.accessControl.login import loginBlueprint
 
 app = Flask(__name__,template_folder=dir+"/",static_folder=dir+"/static")
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://dsdad:team@localhost/APMwSc'
@@ -20,19 +21,12 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://dsdad:team@localhost/APMwS
 
 app.register_blueprint(userBlueprint)
 app.register_blueprint(roleBlueprint)
-
+app.register_blueprint(dptBlueprint)
+app.register_blueprint(loginBlueprint)
 
 @app.route("/")
 def index():
     return render_template("/index.html")
-
-@app.route("/dpt")
-def dpt():
-    return render_template("/presentation/access-control/dpt.html")
-
-@app.route("/login")
-def login():
-    return render_template("/presentation/access-control/login.html")
 
 @app.route('/help', methods = ['GET'])
 def help():
