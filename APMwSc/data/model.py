@@ -1,23 +1,26 @@
-from flask import Flask
-from flask.ext.sqlalchemy import SQLAlchemy
-import psycopg2
-from flask.templating import render_template
 import os
+import sys
+dir = os.path.abspath(os.path.join(os.path.abspath(__file__), '../..'))
+sys.path.append(dir)
+dirB = os.path.abspath(os.path.join(os.path.abspath(__file__), '../../business'))
+sys.path.append(dirB)
+
+from flask import Flask, jsonify
+from flask.ext.sqlalchemy import SQLAlchemy
+from flask.templating import render_template
 import jinja2
 from jinja2.loaders import FileSystemLoader
+from business.accessControl.user import userBlueprint,clsUser
+from business.accessControl.role import roleBlueprint
 
-dir = os.path.abspath(os.path.join(os.path.abspath(__file__), '../..'))
+
 app = Flask(__name__,template_folder=dir+"/",static_folder=dir+"/static")
-
-print(dir+"/static")
-
-app.secret_key = "justALamePass"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://dsdad:team@localhost/APMwSc'
 
 
-print("realpath "+os.path.dirname(os.path.realpath(__file__)))
+app.register_blueprint(userBlueprint)
+app.register_blueprint(roleBlueprint)
 
-print(dir+"/")
 
 @app.route("/")
 def index():
@@ -27,17 +30,19 @@ def index():
 def dpt():
     return render_template("/presentation/access-control/dpt.html")
 
-@app.route("/role")
-def role():
-    return render_template("/presentation/access-control/role.html")
-
 @app.route("/login")
 def login():
     return render_template("/presentation/access-control/login.html")
 
-@app.route("/user")
-def user():
-    return render_template("/presentation/access-control/user.html")
+@app.route('/help', methods = ['GET'])
+def help():
+    """Print available functions."""
+    func_list = {}
+    for rule in app.url_map.iter_rules():
+        if rule.endpoint != 'static':
+            func_list[rule.rule] = app.view_functions[rule.endpoint].__doc__
+    return jsonify(func_list)
+
 
     
 db = SQLAlchemy(app)
