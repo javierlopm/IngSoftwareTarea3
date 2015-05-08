@@ -38,7 +38,7 @@ class clsUser(db.Model):
         self.iddpt    = iddpt   #departamento
         self.idrole   = idrole  #role
 
-    def __repr__(self):
+    def repr(self):
         return '<Usuario %r>' % self.fullname
     
 
