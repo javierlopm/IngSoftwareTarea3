@@ -3,7 +3,7 @@ import sys
 dir = os.path.abspath(os.path.join(os.path.abspath(__file__), '../../..'))
 sys.path.append(dir)
 
-from flask import Flask, Blueprint, redirect,request
+from flask import Flask, Blueprint, jsonify,request, json
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.templating import render_template
 import jinja2
@@ -41,14 +41,15 @@ class clsDpt(db.Model):
         print(self.iddpt)
 
 dptBlueprint = Blueprint('dpt',__name__,template_folder=dir+"/presentation/access-control/")
+
 @dptBlueprint.route("/dpt")
 def dpt():
     db.create_all()
     db.session.commit()
-    oDpt = clsDpt(1,"Lenguaje")
-    oDpt.addMe()
-
     return render_template("dpt.html")
-        
 
-    
+@dptBlueprint.route("/dpt/mostrar", methods=['POST','GET'])
+def mostrar():
+    params  = request.get_json()
+    print(params)
+    return json.dumps(params)

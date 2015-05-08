@@ -46,3 +46,4 @@ def user():
     db.session.commit()
 
     return render_template("role.html")
+

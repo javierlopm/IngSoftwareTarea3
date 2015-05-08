@@ -1,5 +1,36 @@
 {% extends "presentation/access-control/base.html" %}
 {%block contenido%}
+    <script type="text/javascript">
+        $.postJSON = function(url, data, callback) {
+        return jQuery.ajax({
+            'type': 'POST',
+            'url': url,
+            'contentType': 'application/json',
+            'data': $.toJSON(data),
+            'dataType': 'json',
+            'success': callback
+        });
+        };
+
+        var app = angular.module('test', []);
+
+        app.controller('test', function ($scope, $http) {
+            $scope.nombreDpt = "val 1 here";
+
+            $scope.enviar = function () {
+                alert('it should submit now, if it worked, you\'ll see some json');
+            }
+        });
+
+
+    </script>
+
     <h1>Bienvenido a la página de control de departamentos</h1>
+
+    <form ng-app="test" ng-controller="test" action="/dpt/mostrar" method="get">
+        <input type="text" name="nombreDpt" ng-model="nombreDpt"/>
+        <input type="submit" ng-click="enviar()">
+    </form>
+
     
 {%endblock%}
