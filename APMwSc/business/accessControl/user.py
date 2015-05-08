@@ -36,7 +36,10 @@ class clsUser(db.Model):
         self.password = password
         self.email    = email
         self.iddpt    = iddpt   #departamento
-        self.idrole   = idrole #role
+        self.idrole   = idrole  #role
+
+    def __repr__(self):
+        return '<Usuario %r>' % self.fullname
     
 
 
