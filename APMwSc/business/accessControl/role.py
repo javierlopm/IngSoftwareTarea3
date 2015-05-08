@@ -8,7 +8,6 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from flask.templating import render_template
 import jinja2
 from jinja2.loaders import FileSystemLoader
-from sqlalchemy.sql.schema import PrimaryKeyConstraint
 
 
 app = Flask(__name__,template_folder=dir+"/",static_folder=dir+"/static")
@@ -17,16 +16,11 @@ db = SQLAlchemy(app)
 
 roleBlueprint = Blueprint('role',__name__,template_folder=dir+"/presentation/access-control/")
 @roleBlueprint.route("/role")
-def role():
+def user():
     return render_template("role.html")
 
+from sqlalchemy.sql.schema import PrimaryKeyConstraint
 class clsRole(db.Model):
     __tablename__ = 'role'
-    namerole  = db.Column(db.String(50),         nullable=False )
-    idrole    = db.Column(db.Integer   ,primary_key= True)
-    user_role = db.relationship('user', backref='role', lazy='dynamic')
-    
-    def __init__(self,idrole,namerole):
-        self.idrole = idrole
-        self.namerole = namerole
-        
+    namerole = db.Column(db.String(50), nullable   = False )
+    idrole   = db.Column(db.Integer   , primary_key= True  )

@@ -10,7 +10,7 @@ import jinja2
 from jinja2.loaders import FileSystemLoader
 from sqlalchemy.sql.schema import PrimaryKeyConstraint
 
-app = Flask(__name__,template_folder=dir+"/",static_folder=dir+"/static")
+app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:holahola@localhost/APMwSc'
 db = SQLAlchemy(app)
 
@@ -21,12 +21,11 @@ def dpt():
 
 class clsDpt(db.Model):
     __tablename__ = 'dpt'
-    namedpt = db.column(db.String(50),   nullable=False )
-    iddpt    = db.column(db.Integer   ,primary_key= True)
-    user_dpt = db.relationship('user', backref='dpt', lazy='dinamic')
+    namedpt  = db.Column(db.String(50), nullable   = False               )
+    iddpt    = db.Column(db.Integer   , primary_key= True                )
     
     def __init__(self,iddpt,namedpt):
-        self.iddpt = iddpt
+        self.iddpt   = iddpt
         self.namedpt = namedpt
         
 
