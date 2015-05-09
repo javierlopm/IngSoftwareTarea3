@@ -52,15 +52,4 @@ def dpt():
     elif request.method == "POST":
         params  = request.get_json()
         print(params)
-
         return render_template("dpt.html")
-
-@dptBlueprint.route("/dpt/mostrar", methods=['POST','GET'])
-def mostrar():
-    params  = request.get_json()
-    hey = request.data
-    dataDict = json.loads(hey)
-    #print(params)
-    #return json.dumps(params)
-    #return jsonify(results=params)
-    return "Hello world"
