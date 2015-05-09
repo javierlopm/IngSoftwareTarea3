@@ -6,6 +6,21 @@
 
 /* Toggle Styles */
 
+.lista{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    width: 20em;
+}
+
+.elemento{
+    background-repeat: no-repeat;
+    background-position: 100% .4em;
+    padding-right: .6em;
+    margin: 1em 0;
+}
+
 #wrapper {
     padding-left: 0;
     -webkit-transition: all 0.5s ease;

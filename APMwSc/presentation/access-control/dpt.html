@@ -6,8 +6,8 @@
 
         app.controller("add", 
             function($scope,$http,$location){
-                $scope.nombreDpt = "Nombre del dpto"
-                $scope.idDpt     = 5
+                $scope.nombreDpt = ""
+                $scope.idDpt     = 0
 
 
                 $scope.enviar = function() {
@@ -42,9 +42,24 @@
     <h1>Bienvenido a la página de control de departamentos</h1>
 
     <form ng-app="inputs" ng-controller="add" method="get" >
-        <input type="text"   ng-mousedown="borrarT()" ng-model="nombreDpt"/>
-        <input type="number"   ng-mousedown="borrarN()" ng-model="idDpt"/>
-        <input type="submit" ng-click="enviar()">
+        <ul class="lista">
+            <li class="elemento">
+                Nombre del departamento: 
+            </li>            
+            <li class="elemento">
+                <input type="text"   ng-mousedown="borrarT()" ng-model="nombreDpt"/>
+            </li>
+            <li class="elemento">
+                Id:
+            </li>            
+            <li class="elemento">
+                <input type="number"   ng-mousedown="borrarN()" ng-model="idDpt"/>
+            </li>
+            <li class="elemento">
+                <input type="submit" ng-click="enviar()">
+            </li>
+        </ul>
+        
     </form>
 
     

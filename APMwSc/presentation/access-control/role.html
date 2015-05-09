@@ -1,5 +1,63 @@
 {% extends "presentation/access-control/base.html" %}
 {%block contenido%}
     <h1>Bienvenido a la página de control de roles</h1>
-    
+    <script type="text/javascript">
+
+        var app = angular.module('inputs', []);
+
+        app.controller("add", 
+            function($scope,$http,$location){
+                $scope.nombreRol = "<Scrum Master>"
+                $scope.idRol     = 0
+
+
+                $scope.enviar = function() {
+                    console.log(angular.toJson($scope.nombreDpt));
+                    var data = {}
+                    data["nombreRol"] = $scope.nombreRol;
+                    data["idRol"]     = $scope.idRol;
+                    
+                    console.log(angular.fromJson(data));
+
+                    $http.post("/role", angular.fromJson(data)).success(
+                        function(data){
+                            $scope.gists = data;
+
+                        }
+                    );
+
+                };
+
+                $scope.borrarT = function(){
+                    this.nombreRol = ""
+                }                
+                $scope.borrarN = function(){
+                    this.idRol = ""
+                }
+            }
+            
+        );
+
+    </script>
+
+    <form ng-app="inputs" ng-controller="add" method="get" >
+        <ul class="lista">
+            <li class="elemento">
+                Rol: 
+            </li>            
+            <li class="elemento">
+                <input type="text"   ng-mousedown="borrarT()" ng-model="nombreRol"/>
+            </li>
+            <li class="elemento">
+                Id:
+            </li>            
+            <li class="elemento">
+                <input type="number"   ng-mousedown="borrarN()" ng-model="idRol"/>
+            </li>
+            <li class="elemento">
+                <input type="submit" ng-click="enviar()">
+            </li>
+        </ul>
+        
+    </form>
 {%endblock%}

@@ -1,4 +1,85 @@
 {% extends "/base.html" %}
 {%block contenido%}
     <h1>Bienvenido a la página de control de usuarios</h1>
+    <script type="text/javascript">
+
+        var app = angular.module('inputs', []);
+
+        app.controller("add", 
+            function($scope,$http,$location){
+                $scope.nombre   = ""
+                $scope.password = ""
+                $scope.correo   = ""
+                $scope.idRol    = 0
+                $scope.idDpt    = 0
+
+
+                $scope.enviar = function() {
+                    console.log(angular.toJson($scope.nombreDpt));
+                    var data = {}
+                    data["nombre"]    = $scope.nombre;
+                    data["password"]  = $scope.password;
+                    data["correo"]    = $scope.correo;
+                    data["idRol"]     = $scope.idRol;
+                    data["idRol"]     = $scope.idRol;
+                    
+                    console.log(angular.fromJson(data));
+
+                    $http.post("/role", angular.fromJson(data)).success(
+                        function(data){
+                            $scope.gists = data;
+
+                        }
+                    );
+
+                };
+            }
+            
+        );
+    </script>
+
+    <form ng-app="inputs" ng-controller="add" method="get" >
+        <ul class="lista">
+            <li class="elemento">
+                Nombre completo: 
+            </li>            
+            <li class="elemento">
+                <input type="text"  ng-model="nombre"/>
+            </li>
+            <li class="elemento">
+                Nombre de usuario:
+            </li>            
+            <li class="elemento">
+                <input type="number" ng-model="username"/>
+            </li>            
+            <li class="elemento">
+                Password:
+            </li>            
+            <li class="elemento">
+                <input type="password" ng-model="password"/>
+            </li>           
+            <li class="elemento">
+                Correo electronico:
+            </li>            
+            <li class="elemento">
+                <input type="email" ng-model="correo"/>
+            </li>                 
+            <li class="elemento">
+                Id de departamento:
+            </li>            
+            <li class="elemento">
+                <input type="number" ng-model="idDpt"/>
+            </li>           
+            <li class="elemento">
+                Id de rol:
+            </li>            
+            <li class="elemento">
+                <input type="number" ng-model="idRol"/>
+            </li>
+            <li class="elemento">
+                <input type="submit" ng-click="enviar()">
+            </li>
+        </ul>
+        
+    </form>
 {%endblock%}
