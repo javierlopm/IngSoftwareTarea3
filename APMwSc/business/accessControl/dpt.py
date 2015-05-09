@@ -42,14 +42,25 @@ class clsDpt(db.Model):
 
 dptBlueprint = Blueprint('dpt',__name__,template_folder=dir+"/presentation/access-control/")
 
-@dptBlueprint.route("/dpt")
+@dptBlueprint.route("/dpt", methods=['POST','GET'])
 def dpt():
-    db.create_all()
-    db.session.commit()
-    return render_template("dpt.html")
+    if request.method == "GET":
+        print("HEY IM A GET")
+        db.create_all()
+        db.session.commit()
+        return render_template("dpt.html")
+    elif request.method == "POST":
+        params  = request.get_json()
+        print(params)
+
+        return render_template("dpt.html")
 
 @dptBlueprint.route("/dpt/mostrar", methods=['POST','GET'])
 def mostrar():
     params  = request.get_json()
-    print(params)
-    return json.dumps(params)
+    hey = request.data
+    dataDict = json.loads(hey)
+    #print(params)
+    #return json.dumps(params)
+    #return jsonify(results=params)
+    return "Hello world"
