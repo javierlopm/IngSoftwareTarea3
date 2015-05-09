@@ -10,8 +10,8 @@ import jinja2
 from jinja2.loaders import FileSystemLoader
 from business.accessControl.role import db
 
-app = Flask(__name__,template_folder=dir+"/presentation/access-control",static_folder=dir+"/static")
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:holahola@localhost/APMwSc'
+#app = Flask(__name__,template_folder=dir+"/presentation/access-control",static_folder=dir+"/static")
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:holahola@localhost/APMwSc'
 
 #db = SQLAlchemy(app)
 

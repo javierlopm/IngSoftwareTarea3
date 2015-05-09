@@ -11,12 +11,8 @@ from jinja2.loaders import FileSystemLoader
 from sqlalchemy.sql.schema import PrimaryKeyConstraint
 from business.accessControl.role import db
 
-
-
-
-
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:holahola@localhost/APMwSc'
+#app = Flask(__name__)
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:holahola@localhost/APMwSc'
 
 #db = SQLAlchemy(app)
 
