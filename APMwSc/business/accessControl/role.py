@@ -15,7 +15,7 @@ app = Flask(__name__,template_folder=dir+"/",static_folder=dir+"/static")
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:holahola@localhost/APMwSc'
 db = SQLAlchemy(app)
 
-
+#Modelo para un rol
 from sqlalchemy.sql.schema import PrimaryKeyConstraint
 class clsRole(db.Model):
     __tablename__ = 'role'

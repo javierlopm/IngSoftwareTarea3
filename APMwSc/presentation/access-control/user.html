@@ -29,7 +29,7 @@
                     
                     console.log(angular.fromJson(data));
 
-                    $http.post("/role", angular.fromJson(data)).success(
+                    $http.post("/user", angular.fromJson(data)).success(
                         function(data){
                             $scope.gists = data;
 

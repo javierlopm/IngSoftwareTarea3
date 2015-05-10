@@ -10,12 +10,8 @@ import jinja2
 from jinja2.loaders import FileSystemLoader
 from business.accessControl.role import db
 from business.accessControl.control import clsAccessControl
-#app = Flask(__name__,template_folder=dir+"/presentation/access-control",static_folder=dir+"/static")
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:holahola@localhost/APMwSc'
 
-#db = SQLAlchemy(app)
-
-
+#Clase de usuario como base de datos
 class clsUser(db.Model):
     __tablename__ = 'user'
     fullname = db.Column(db.String(50),    nullable=False)
@@ -41,6 +37,7 @@ class clsUser(db.Model):
 userBlueprint = Blueprint('user',__name__,template_folder=dir+"/presentation/access-control/")
 
 
+#Redireccion a usuario
 @userBlueprint.route("/user",  methods=['POST','GET'])
 def user():
     if request.method == "GET":
@@ -53,7 +50,10 @@ def user():
         #Encriptacion de password y verificacion
         oEncript = clsAccessControl()
         password = oEncript.encript(params['passwordO'])
-        if(oEncript.check_password(password,params['password1']))
+
+        #Solo si las claves son iguales, y la clave paso por las verificaciones
+        #se agrega ala bd
+        if(oEncript.check_password(password,params['passwordT'])):
             oUser = clsUser(
                         params['nombre'],
                         params['username'],
@@ -61,5 +61,5 @@ def user():
                         params['correo'],
                         params['idRol'],
                         params['idDpt'])
-        oUser.addMe()
+            oUser.addMe()
         return render_template("user.html")
