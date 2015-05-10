@@ -7,12 +7,13 @@
 
         app.controller("add", 
             function($scope,$http,$location){
-                $scope.nombre   = ""
-                $scope.username = ""
-                $scope.password = ""
-                $scope.correo   = ""
-                $scope.idRol    = 0
-                $scope.idDpt    = 0
+                $scope.nombre    = ""
+                $scope.usernameO = ""
+                $scope.usernameT = ""
+                $scope.password  = ""
+                $scope.correo    = ""
+                $scope.idRol     = 0
+                $scope.idDpt     = 0
 
 
                 $scope.enviar = function() {
@@ -20,7 +21,8 @@
                     var data = {}
                     data["nombre"]    = $scope.nombre;
                     data["username"]  = $scope.nombre;
-                    data["password"]  = $scope.password;
+                    data["passwordO"]  = $scope.passwordO;
+                    data["passwordT"]  = $scope.passwordT;
                     data["correo"]    = $scope.correo;
                     data["idRol"]     = $scope.idRol;
                     data["idRol"]     = $scope.idRol;
@@ -58,7 +60,13 @@
                 Password:
             </li>            
             <li class="elemento">
-                <input type="password" ng-model="password"/>
+                <input type="password" ng-model="passwordO"/>
+            </li>             
+            <li class="elemento">
+                Repita su password:
+            </li>            
+            <li class="elemento">
+                <input type="password" ng-model="passwordT"/>
             </li>           
             <li class="elemento">
                 Correo electronico:

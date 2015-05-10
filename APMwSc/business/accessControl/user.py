@@ -2,25 +2,24 @@ import os
 import sys
 dir = os.path.abspath(os.path.join(os.path.abspath(__file__), '../../..'))
 sys.path.append(dir)
-
+sys.path.append('.')
 from flask import Flask, Blueprint, redirect,request
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.templating import render_template
 import jinja2
 from jinja2.loaders import FileSystemLoader
 from business.accessControl.role import db
-
+from business.accessControl.control import clsAccessControl
 #app = Flask(__name__,template_folder=dir+"/presentation/access-control",static_folder=dir+"/static")
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:holahola@localhost/APMwSc'
 
 #db = SQLAlchemy(app)
 
 
-
 class clsUser(db.Model):
     __tablename__ = 'user'
     fullname = db.Column(db.String(50),    nullable=False)
-    username = db.Column(db.String(16), primary_key=True )
+    username = db.Column(db.String(16), primary_key=True ) #No deberia ser de 16 sino de 97 que es lo que ocupa la clave encriptada
     password = db.Column(db.String(16),    nullable=False)
     email    = db.Column(db.String(30),      unique=True )
     iddpt    = db.Column(db.Integer   ,db.ForeignKey('dpt.iddpt'))
@@ -50,10 +49,15 @@ def user():
         return render_template("user.html")
     elif request.method == "POST":
         params  = request.get_json()
-        oUser = clsUser(
+
+        #Encriptacion de password y verificacion
+        oEncript = clsAccessControl()
+        password = oEncript.encript(params['passwordO'])
+        if(oEncript.check_password(password,params['password1']))
+            oUser = clsUser(
                         params['nombre'],
                         params['username'],
-                        params['password'],
+                        params['passwordO'],
                         params['correo'],
                         params['idRol'],
                         params['idDpt'])
