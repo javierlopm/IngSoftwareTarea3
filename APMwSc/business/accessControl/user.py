@@ -50,7 +50,12 @@ def user():
         return render_template("user.html")
     elif request.method == "POST":
         params  = request.get_json()
-        print(params)
-        oUser = clsUser(params['idDpt'],params['nombreDpt'])
+        oUser = clsUser(
+                        params['nombre'],
+                        params['username'],
+                        params['password'],
+                        params['correo'],
+                        params['idRol'],
+                        params['idDpt'])
         oUser.addMe()
         return render_template("user.html")

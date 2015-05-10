@@ -8,6 +8,7 @@
         app.controller("add", 
             function($scope,$http,$location){
                 $scope.nombre   = ""
+                $scope.username = ""
                 $scope.password = ""
                 $scope.correo   = ""
                 $scope.idRol    = 0
@@ -18,6 +19,7 @@
                     console.log(angular.toJson($scope.nombreDpt));
                     var data = {}
                     data["nombre"]    = $scope.nombre;
+                    data["username"]  = $scope.nombre;
                     data["password"]  = $scope.password;
                     data["correo"]    = $scope.correo;
                     data["idRol"]     = $scope.idRol;
