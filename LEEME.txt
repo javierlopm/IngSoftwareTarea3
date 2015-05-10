@@ -1,0 +1,10 @@
+Para correr el servidor de forma local usar python3.4 APMwSc/data/model.py
+y se podra observar su ejecución mediante la dirección 127.0.0.1:5000/user.
+
+Para poder hacer uso de las bases de datos se necesita que el archivo role.py
+tenga en la configuracion de la base de datos en el parametro SQLALCHEMY_DATABASE_URI
+el valor 'postgresql://[usuario]:[clave]@localhost/APMwSc', además que la base de datos
+APMwSc exista, y que sea posible hace login en el usuario postgres mediante el comando
+psql -U postgres -h localhost. En nuestro repositorio de github, nuestros valores están
+instanciados para permitir conexión desde nuestros equipos.
+
